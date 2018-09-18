@@ -10,6 +10,8 @@ export class RentalList extends React.Component{
         this.state = {
             rentals: [1,2,3]
         }
+
+        this.addRental = this.addRental.bind(this);
     }
 
     renderRentals(){
@@ -20,6 +22,14 @@ export class RentalList extends React.Component{
         });
     }
 
+    addRental(){
+        const newRentals = this.state.rentals;
+        newRentals.push(1);
+        this.setState({
+            rentals: newRentals
+        });
+    }
+
     render (){
         return(
             <section id='rentalListing'>
@@ -27,6 +37,7 @@ export class RentalList extends React.Component{
                 <div className='row'>
                     {this.renderRentals()}
                 </div>
+                <button onClick={this.addRental} > Add Rental </button>
             </section>
         )
     }
