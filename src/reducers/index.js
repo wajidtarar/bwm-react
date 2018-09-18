@@ -7,7 +7,6 @@ const reduces = redux.combineReducers({
 });
 
 export const init = () => {
-    debugger;
     const store = redux.createStore(reduces);
     return store;
 
