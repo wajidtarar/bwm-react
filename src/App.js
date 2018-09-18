@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { BrowserRouter, Route} from 'react-router-dom';
 
 import { Header } from './shared/Header';
 import { RentalList } from './components/rental/RentalList';
@@ -8,30 +9,18 @@ import './App.css';
 
 class App extends Component {
 
-  constructor(){
-    super();
-    this.state = {
-      isRentalList: true
-    }
-
-    this.navigate = this.navigate.bind(this);
-  }
-
-  navigate(){
-    this.setState({
-      isRentalList: !this.state.isRentalList
-    });
-  }
   render() {
     return (
-      <div className="App">
-        <Header/>
-        <button onClick={this.navigate}>Navigate away</button>
-        <div className='container'>
-          { this.state.isRentalList ? <RentalList /> : <RentalDetail /> }
-        </div>
+      <BrowserRouter>
+        <div className="App">
+          <Header/>
+          <div className='container'>
+            <Route exact path = "/" component={RentalList} />
+            <Route exact path = "/test" component={RentalDetail} />
+          </div>
 
-      </div>
+        </div>
+      </BrowserRouter>
     );
   }
 }
