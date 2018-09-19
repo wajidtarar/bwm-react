@@ -1,9 +1,10 @@
 
 import * as redux from 'redux';
-import { rentalReducer } from './rental-reducer';
+import { rentalReducer, selectedRentalReducer } from './rental-reducer';
 
 const reduces = redux.combineReducers({
-    rentals: rentalReducer
+    rentals: rentalReducer,
+    rental: selectedRentalReducer
 });
 
 export const init = () => {

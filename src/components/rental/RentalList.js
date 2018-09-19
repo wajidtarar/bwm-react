@@ -17,14 +17,11 @@ class RentalList extends React.Component{
         });
     }
 
-    componentDidMount(){
-        debugger;
+    componentWillMount(){
         this.props.dispatch(actions.fetchRentals());
     }
+    
     render (){
-
-        this.props;
-
         return(
             <section id='rentalListing'>
                 <h1 className='page-title'>Your Home All Around the World</h1>
@@ -38,8 +35,6 @@ class RentalList extends React.Component{
 
 function mapStateToProps(state){
     
-    debugger;
-
     return {
         rentals: state.rentals.data
     }
