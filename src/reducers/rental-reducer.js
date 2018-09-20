@@ -24,7 +24,6 @@ export const rentalReducer = (state = INITIAL_STATE.rentals, action) => {
 
 
 export const selectedRentalReducer = (state= INITIAL_STATE.rental, action) => {
-  debugger;
 
   switch (action.type){
     case FETCH_RENTAL_BY_ID_SUCCESS:

@@ -10,14 +10,14 @@ class RentalDetail extends React.Component
   componentWillMount()
   {
       const rentalId = this.props.match.params.id;
-      debugger;
-    //Dispatch Action
+
+      //Dispatch Action
     this.props.dispatch(actions.fetchRentalById(rentalId));
   }
 
     render(){
         const rental = this.props.rental;
-        debugger;
+        
         if(rental.id){
             return(
             <div>
@@ -37,7 +37,6 @@ class RentalDetail extends React.Component
 
 
 function mapStateToProps(state){
-    debugger;
 
    return {
        rental: state.rental.data
