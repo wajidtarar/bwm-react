@@ -4,7 +4,7 @@ import { BrowserRouter, Route, Redirect} from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import { Header } from 'shared/Header';
-import RentalList  from 'components/rental/rental-listing/RentalList';
+import RentalListing  from 'components/rental/rental-listing/RentalListing';
 import RentalDetail  from 'components/rental/rental-detail/RentalDetail';
 import { init } from 'reducers';
 
@@ -22,7 +22,7 @@ class App extends Component {
             <Header/>
             <div className='container'>
               <Route exact path = '/'  render = { () => { return <Redirect to='rentals' />} } />
-              <Route exact path = '/rentals' component={RentalList} />
+              <Route exact path = '/rentals' component={RentalListing} />
               <Route exact path = '/rentals/:id' component={RentalDetail} />
             </div>
 

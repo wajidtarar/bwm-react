@@ -1,6 +1,5 @@
 
 import { FETCH_RENTALS, 
-          FETCH_RENTAL_BY_ID, 
           FETCH_RENTAL_BY_ID_SUCCESS, 
           FETCH_RENTAL_BY_ID_INIT} from './types';
 
