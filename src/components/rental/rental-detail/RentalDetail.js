@@ -18,7 +18,7 @@ class RentalDetail extends React.Component
     render(){
         const rental = this.props.rental;
         
-        if(rental.title){
+        if(rental._id){
             return(
             <div>
                 <h1> { rental.title } </h1>
@@ -38,7 +38,7 @@ class RentalDetail extends React.Component
 
 function mapStateToProps(state){
 
-   return {
+    return {
        rental: state.rental.data
     }
 }
