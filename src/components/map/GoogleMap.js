@@ -6,6 +6,7 @@ import {
     withGoogleMap,
     GoogleMap,
     Marker,
+    Circle
   } from "react-google-maps";
   
 
@@ -13,7 +14,6 @@ import {
 
     const coordinates = props.coordinates;
     // const {coordinates} = props;
-    debugger;
 
     return (
     <GoogleMap
@@ -21,8 +21,9 @@ import {
       defaultCenter={coordinates}
       center={coordinates}
     >
-      <Marker
-        position={coordinates}
+      <Circle
+        radius={500}
+        center={coordinates}
       />
     </GoogleMap>
     )
@@ -67,8 +68,6 @@ import {
           if(status === 'OK'){
             const geometry = result[0].geometry.location;
             const coordinates = {lat: geometry.lat(), lng: geometry.lng()};
-
-            debugger;
 
             this.setState({
               coordinates: coordinates
