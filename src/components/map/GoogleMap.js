@@ -8,7 +8,9 @@ import {
     Marker,
   } from "react-google-maps";
   
-  export const MapWithAMarker = withScriptjs(withGoogleMap(props =>
+
+  function MapComponent(props){
+    return (
     <GoogleMap
       defaultZoom={8}
       defaultCenter={{ lat: -34.397, lng: 150.644 }}
@@ -17,4 +19,20 @@ import {
         position={{ lat: -34.397, lng: 150.644 }}
       />
     </GoogleMap>
-  ));
+    )
+  }
+
+  function withGeoCode(WrappedComponent){
+    return class extends React.Component {
+      render(){
+
+        alert(this.props.location);
+        
+        return(
+          <WrappedComponent />
+        )
+      }
+    }
+  }
+
+  export const MapWithGeoCode = withScriptjs(withGoogleMap(withGeoCode(MapComponent)));
