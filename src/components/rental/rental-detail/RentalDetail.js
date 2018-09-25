@@ -3,6 +3,8 @@ import React from 'react';
 
 import {connect} from 'react-redux';
 import * as actions from 'actions';
+import {RentalDetailInfo} from './RentalDetailInfo';
+// import {MapWithAMarker} from 'components/map/GoogleMap'
 
 class RentalDetail extends React.Component
 {
@@ -20,12 +22,27 @@ class RentalDetail extends React.Component
         
         if(rental._id){
             return(
-            <div>
-                <h1> { rental.title } </h1>
-                <h1> { rental.city } </h1>
-                <h1> { rental.description } </h1>
-                <h1> ${ rental.dailyRate } </h1>
-            </div>
+                <section id='rentalDetails'>
+                <div className='upper-section'>
+                    <div className='row'>
+                    <div className='col-md-6'>
+                        <img src={rental.image} alt=''></img>
+                    </div>
+                    <div className='col-md-6'>
+                    </div>
+                    </div>
+                </div>
+
+                <div className='details-section'>
+                    <div className='row'>
+                    <div className='col-md-8'>
+                        <RentalDetailInfo rental={rental}/>
+                    </div>
+                    <div className='col-md-4'> BOOKING</div>
+                    </div>
+                </div>
+                </section>
+
             )
         } else{
             return(
