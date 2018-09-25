@@ -6,7 +6,6 @@ import {toUpperCase, rentalType} from 'helpers';
 export function RentalDetailInfo(props){
 
     const rental = props.rental;
-    debugger;
 
     return(
         <div className='rental'>

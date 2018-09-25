@@ -19,7 +19,6 @@ class RentalDetail extends React.Component
 
     render(){
         const rental = this.props.rental;
-        debugger;
         if(rental._id){
             return(
                 <section id='rentalDetails'>
