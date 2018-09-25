@@ -18,7 +18,7 @@ import {
 
     return (
     <GoogleMap
-      defaultZoom={8}
+      defaultZoom={13}
       defaultCenter={coordinates}
       center={coordinates}
     >
@@ -53,30 +53,42 @@ import {
       }
 
       componentWillMount(){
-        this.geoCodeLocation();
+        this.getGeoCodedLocation();
       }
 
-      geoCodeLocation(){
-        const location = this.props.location;
+      geoCodeLocation(location){
         const geocoder = new window.google.maps.Geocoder();
 
-        if(this.cacher.isValueCached(location)){
-
-        }else {
-            geocoder.geocode({address: location}, (result, status) => {
+        return new Promise((resolve, reject) => {
+          geocoder.geocode({address: location}, (result, status) => {
           
             if(status === 'OK'){
               const geometry = result[0].geometry.location;
-              const coordinates = {lat: geometry.lat(), lng: geometry.lng()};
+              const coordinates = {lat: geometry.lat(), lng: geometry.lng()};              
               
-              debugger;
-              this.cacher.cacheValue(location, coordinates)
-              this.setState({
-                coordinates: coordinates
-              })
-            }
-  
+              this.cacher.cacheValue(location, coordinates);
+              resolve(coordinates);
+            }else{
+              reject('Some error so rejected.....')
+            } 
           });
+        });
+      }
+
+      getGeoCodedLocation(){
+        const location = this.props.location;
+
+        if(this.cacher.isValueCached(location)){ 
+          this.setState({ coordinates: this.cacher.getCacheValue(location)});
+        }else {
+          this.geoCodeLocation(location).then(
+            (coordinates) => {
+              this.setState({ coordinates: coordinates});
+            },
+            (error) => {
+              console.log(error);
+            }
+          );
         }
       }
 
