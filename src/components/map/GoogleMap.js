@@ -7,14 +7,15 @@ import {
     withScriptjs,
     withGoogleMap,
     GoogleMap,
-    Circle
+    Circle,
+    InfoWindow
   } from "react-google-maps";
   
 
   function MapComponent(props){
 
-    const coordinates = props.coordinates;
-    // const {coordinates} = props;
+    // const coordinates = props.coordinates;
+    const {coordinates, isError, isLocationLoaded} = props;
 
     return (
     <GoogleMap
@@ -22,10 +23,16 @@ import {
       defaultCenter={coordinates}
       center={coordinates}
     >
-      <Circle
-        radius={500}
-        center={coordinates}
-      />
+      {isLocationLoaded && !isError && <Circle radius={500} center={coordinates} />}
+      {isLocationLoaded && isError &&  
+        <InfoWindow position={coordinates} options={{maxWidth: 300}}>
+          <div>
+            there was peolm loding as the coordinates 
+            are no valid since we cant locate this 
+            and how can we display
+          </div>
+        </InfoWindow>}
+
     </GoogleMap>
     )
   }
@@ -48,7 +55,9 @@ import {
           coordinates: {
             lat: 0,
             lng: 0
-          }
+          },
+          isError:false,
+          isLocationLoaded: false
         }
       }
 
@@ -76,16 +85,18 @@ import {
       }
 
       getGeoCodedLocation(){
-        const location = this.props.location;
+        // let location = this.props.location;
+        const location = 'ancsknksn';
 
         if(this.cacher.isValueCached(location)){ 
-          this.setState({ coordinates: this.cacher.getCacheValue(location)});
+          this.setState({ coordinates: this.cacher.getCacheValue(location), isLocationLoaded:true});
         }else {
           this.geoCodeLocation(location).then(
             (coordinates) => {
-              this.setState({ coordinates: coordinates});
+              this.setState({ coordinates: coordinates, isLocationLoaded:true});
             },
             (error) => {
+              this.setState({ isError: true, isLocationLoaded:true});
               console.log(error);
             }
           );
