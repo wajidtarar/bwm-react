@@ -1,16 +1,17 @@
 
 const express = require('express');
+const User = require('../controllers/user');
+
 const router = express.Router();
-const User = require('../models/User');
 
-router.get('auth', function(req, res){
-    Rental.find({}, function(err, foundRentals){
-        res.json(foundRentals);
-    });
+router.post('/auth', User.auth);
+
+router.post('/register', User.register);
+
+
+router.post('', function(req, res){
+    res.json({username: 'abc'}) ;
 });
 
-router.get('/register', function(req, res){
-    const rentalId = req.params.id;
-});
 
 module.exports = router;
