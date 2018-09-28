@@ -79,3 +79,30 @@ exports.register = function(req, res) {
 
     // res.json({username, email});
 }
+
+exports.authMiddleware = function(req, res, next){
+    const token = req.headers.authorization;
+
+    if(token){
+        const user = parseToken(token);
+        User.findById(user.userId, function(err, user){
+            if(err){
+                return res.status(422).send({errors: normalizeErrors(err.errors)});
+            } 
+            if(user){
+                res.locals.user = user;
+                next();
+            }else{
+                return res.status(422).send({errors: [{title: 'No authorization', description: 'User need to lognt o access this.....'}]});
+            }
+        });
+    }else {
+        return res.status(422).send({errors: [{title: 'No authorization', description: 'User need to lognt o access this.....'}]});
+    }
+}
+
+function parseToken(token){
+    // verify a token symmetric - synchronous
+    var verify =  jwt.verify(token.split(' ')[1], config.SECRET);
+    return verify;
+}
