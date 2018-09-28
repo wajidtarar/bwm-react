@@ -40,7 +40,6 @@ class FakeDb{
 
     async cleanDb(){
        await  Rental.deleteMany({},function(err,numberRemoved){
-            console.log("inside remove call back" + numberRemoved);
         });
     }
 
