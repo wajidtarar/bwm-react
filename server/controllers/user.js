@@ -93,16 +93,19 @@ exports.authMiddleware = function(req, res, next){
                 res.locals.user = user;
                 next();
             }else{
-                return res.status(422).send({errors: [{title: 'No authorization', description: 'User need to lognt o access this.....'}]});
+                return notAuthorized(res);
             }
         });
     }else {
-        return res.status(422).send({errors: [{title: 'No authorization', description: 'User need to lognt o access this.....'}]});
+        return notAuthorized(res);
     }
 }
 
 function parseToken(token){
     // verify a token symmetric - synchronous
-    var verify =  jwt.verify(token.split(' ')[1], config.SECRET);
-    return verify;
+    return jwt.verify(token.split(' ')[1], config.SECRET);
+}
+
+function notAuthorized(res){
+    return res.status(401).send({errors: [{title: 'No authorization', description: 'User need to lognt o access this.....'}]});
 }
