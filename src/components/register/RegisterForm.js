@@ -7,7 +7,7 @@ import {BwmResError}  from 'components/shared/form/BwmResError';
 
 const RegisterForm = props => {
 
-  const { handleSubmit, pristine, reset, 
+  const { handleSubmit, pristine, 
     submitting, submitCallback, valid, errors } = props
 
     debugger;
