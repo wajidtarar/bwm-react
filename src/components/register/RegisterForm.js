@@ -1,29 +1,12 @@
 
 import React from 'react'
 import { Field, reduxForm } from 'redux-form'
+import {BwmInput}  from 'components/shared/form/BwmInput';
 
 
-const renderField = ({
-    input,
-    label,
-    type,
-    className,
-    meta: { touched, error, warning }
-  }) => (
-    <div className='form-group'>
-      <label>{label}</label>
-      <div className='input-group   '>
-        <input {...input} type={type} className={className} />
-
-      </div>
-        {touched &&
-          ((error && <div className='alert alert-danger'>{error}</div>))}
-    </div>
-  )
-
-  
 const RegisterForm = props => {
-  const { handleSubmit, pristine, reset, submitting, submitCallback } = props
+  const { handleSubmit, pristine, reset, 
+    submitting, submitCallback, valid } = props
   return (
     <form onSubmit={handleSubmit(submitCallback)}>
         <Field
@@ -33,7 +16,7 @@ const RegisterForm = props => {
         placeholder="User Name"
         label="User Name"
         className="form-control"
-        component= {renderField}
+        component= {BwmInput}
         />
         <Field
         name="email"
@@ -41,7 +24,7 @@ const RegisterForm = props => {
         type="email"
         label="Email"
         className="form-control"
-        component= {renderField}
+        component= {BwmInput}
         />
         <Field
         name="password"
@@ -49,7 +32,7 @@ const RegisterForm = props => {
         type="password"
         label="Password"
         className="form-control"
-        component= {renderField}
+        component= {BwmInput}
         />
         <Field
         name="passwordConfirmation"
@@ -57,10 +40,10 @@ const RegisterForm = props => {
         type="password"
         label="Password Confirmation"
         className="form-control"
-        component= {renderField}
+        component= {BwmInput}
         />
  
-        <button className="btn btn-bwm btn-form" type="submit" disabled={pristine || submitting}>
+        <button className="btn btn-bwm btn-form" type="submit" disabled={!valid || pristine || submitting}>
           Submit
         </button>
     </form>
