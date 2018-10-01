@@ -3,29 +3,17 @@ import React from 'react'
 import { Field, reduxForm } from 'redux-form'
 
 const RegisterForm = props => {
-  const { handleSubmit, pristine, reset, submitting } = props
+  const { handleSubmit, pristine, reset, submitting, submitCallback } = props
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(submitCallback)}>
       <div>
         <label>First Name</label>
         <div>
           <Field
-            name="firstName"
+            name="username"
             component="input"
             type="text"
-            placeholder="First Name"
-            className="form-control"
-          />
-        </div>
-      </div>
-      <div>
-        <label>Last Name</label>
-        <div>
-          <Field
-            name="lastName"
-            component="input"
-            type="text"
-            placeholder="Last Name"
+            placeholder="User Name"
             className="form-control"
           />
         </div>
@@ -37,18 +25,36 @@ const RegisterForm = props => {
             name="email"
             component="input"
             type="email"
-            placeholder="Email"
+            className="form-control"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Password</label>
+        <div>
+          <Field
+            name="password"
+            component="input"
+            type="password"
+            className="form-control"
+          />
+        </div>
+      </div>
+      <div>
+        <label>Confirm Password</label>
+        <div>
+          <Field
+            name="confirmPassword"
+            component="input"
+            type="password"
             className="form-control"
           />
         </div>
       </div>
  
       <div>
-        <button className="btn btn-primary" type="submit" disabled={pristine || submitting}>
+        <button className="btn btn-bwm btn-form" type="submit" disabled={pristine || submitting}>
           Submit
-        </button>
-        <button type="button" disabled={pristine || submitting} onClick={reset}>
-          Clear Values
         </button>
       </div>
     </form>
