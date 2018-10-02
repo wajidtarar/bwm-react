@@ -45,10 +45,7 @@ export const fetchRentals = () => {
     .then((res) => {return res.data})
     .then((rentals) => {
       dispatch(fetchRentalsSuccess(rentals))
-    })
-    .catch((response => {
-      dispatch(loginFailure(response.data.errors));
-    }))
+    });
   }
 }
 
@@ -85,8 +82,13 @@ export const login = (userData) => {
     return axios.post('/api/v1/users/auth', {...userData})
       .then(res => res.data)
       .then(token => {
+        debugger;
         localStorage.setItem('token_auth', token);
         dispatch(loginSuccess(token));
       })
+      .catch((error => {
+        debugger;
+        dispatch(loginFailure(error.response.data.errors));
+      }))
   }
 }

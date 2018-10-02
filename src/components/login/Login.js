@@ -1,42 +1,27 @@
 import React from 'react';
+import {connect} from 'react-redux';
 import LoginForm from './LoginForm';
 import * as actions from 'actions';
 import {Redirect} from 'react-router-dom';
 
-export class Login extends React.Component{
+class Login extends React.Component{
 
     constructor(){
         super();
         this.loginUser = this.loginUser.bind(this);
-
-        this.state = {
-            errors:[],
-            token:'',
-            redirect: false
-        }
     }
 
     loginUser(userData){
-        actions.login(userData).then(
-            (res) => {
-                this.setState({
-                    token: res,
-                    redirect: true
-                });
-            },
-            (err) => {
-                this.setState({
-                    errors: err
-                });
-            }
-        );
+
+        this.props.dispatch(actions.login(userData));
     }
 
     render(){
 
-        const {errors, redirect} = this.state;
-        debugger;
-        if(redirect){
+
+        const errors = [];
+        const isAuth = false;
+        if(isAuth){
             return <Redirect to={{pathname: '/rentals', state: {loginSuccess: true} }} />
         }
 
@@ -63,3 +48,11 @@ export class Login extends React.Component{
     }
 
 }
+
+function mapStateToProps(state){
+    return {
+        auth: state.auth
+    }
+}
+
+export default connect(mapStateToProps)(Login)
