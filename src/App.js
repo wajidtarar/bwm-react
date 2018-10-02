@@ -11,12 +11,21 @@ import RentalDetail  from 'components/rental/rental-detail/RentalDetail';
 import Login  from 'components/login/Login';
 import {Register}  from 'components/register/Register';
 
+import * as actions from 'actions';
 
 import './App.css';
 
 const store = init();
 
 class App extends Component {
+
+  componentWillMount (){
+    this.checkAuthState();
+  }
+
+  checkAuthState(){
+    store.dispatch(actions.checkAuthState());
+  }
 
   render() {
     return (

@@ -1,11 +1,14 @@
 
 import axios from 'axios';
+import AuthService from 'services/AuthService';
 
 import { FETCH_RENTAL_BY_ID_SUCCESS, 
           FETCH_RENTAL_BY_ID_INIT,
           FETCH_RENTALS_SUCCESS,
           LOGIN_SUCCESS,
           LOGIN_ERROR} from './types';
+
+//---------------Rental Actions----------------------------------
 
 const fetchRentalByIdSuccess = (rental) => {
   return {
@@ -24,18 +27,6 @@ const fetchRentalsSuccess = (rentals) => {
   return{
     type: FETCH_RENTALS_SUCCESS,
     rentals: rentals
-  }
-}
-const loginSuccess = (token) => {
-  return{
-    type: LOGIN_SUCCESS,
-    token
-  }
-}
-const loginFailure = (errors) => {
-  return{
-    type: LOGIN_ERROR,
-    errors: errors
   }
 }
 
@@ -68,26 +59,50 @@ export const register = (userData) => {
   
   return axios.post('/api/v1/users/register', {...userData}).then(
     (res) => {
-      debugger;
       return res.data;
     },
     (err)=> {
-      debugger;
       return Promise.reject(err.response.data.errors);
     });
 }
+
+
+
+//---------------Auth Actions----------------------------------
+
+
+export const checkAuthState = () => {
+
+  return dispatch => {
+    if(AuthService.isAuthenticated()){
+      dispatch(loginSuccess());
+    }
+  }
+}
+
+const loginSuccess = () => {
+
+  return{
+    type: 'LOGIN_SUCCESS'
+  }
+}
+const loginFailure = (errors) => {
+  return{
+    type: LOGIN_ERROR,
+    errors: errors
+  }
+}
+
 
 export const login = (userData) => {
   return dispatch => {
     return axios.post('/api/v1/users/auth', {...userData})
       .then(res => res.data)
       .then(token => {
-        debugger;
         localStorage.setItem('auth_token', token);
-        dispatch(loginSuccess(token));
+        dispatch(loginSuccess());
       })
       .catch((error => {
-        debugger;
         dispatch(loginFailure(error.response.data.errors));
       }))
   }
