@@ -83,7 +83,7 @@ export const login = (userData) => {
       .then(res => res.data)
       .then(token => {
         debugger;
-        localStorage.setItem('token_auth', token);
+        localStorage.setItem('auth_token', token);
         dispatch(loginSuccess(token));
       })
       .catch((error => {
