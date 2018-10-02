@@ -3,7 +3,9 @@ import axios from 'axios';
 
 import { FETCH_RENTAL_BY_ID_SUCCESS, 
           FETCH_RENTAL_BY_ID_INIT,
-          FETCH_RENTALS_SUCCESS} from './types';
+          FETCH_RENTALS_SUCCESS,
+          LOGIN_SUCCESS,
+          LOGIN_ERROR} from './types';
 
 const fetchRentalByIdSuccess = (rental) => {
   return {
@@ -24,6 +26,18 @@ const fetchRentalsSuccess = (rentals) => {
     rentals: rentals
   }
 }
+const loginSuccess = (token) => {
+  return{
+    type: LOGIN_SUCCESS,
+    token
+  }
+}
+const loginFailure = (errors) => {
+  return{
+    type: LOGIN_ERROR,
+    errors: errors
+  }
+}
 
 export const fetchRentals = () => {
   return (dispatch) => {
@@ -31,7 +45,10 @@ export const fetchRentals = () => {
     .then((res) => {return res.data})
     .then((rentals) => {
       dispatch(fetchRentalsSuccess(rentals))
-    });
+    })
+    .catch((response => {
+      dispatch(loginFailure(response.data.errors));
+    }))
   }
 }
 
@@ -61,4 +78,15 @@ export const register = (userData) => {
       debugger;
       return Promise.reject(err.response.data.errors);
     });
+}
+
+export const login = (userData) => {
+  return dispatch => {
+    return axios.post('/api/v1/users/auth', {...userData})
+      .then(res => res.data)
+      .then(token => {
+        localStorage.setItem('token_auth', token);
+        dispatch(loginSuccess(token));
+      })
+  }
 }
