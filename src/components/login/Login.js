@@ -18,9 +18,8 @@ class Login extends React.Component{
 
     render(){
 
-
-        const errors = [];
-        const isAuth = false;
+        const {isAuth, errors} = this.props.auth;
+        
         if(isAuth){
             return <Redirect to={{pathname: '/rentals', state: {loginSuccess: true} }} />
         }
