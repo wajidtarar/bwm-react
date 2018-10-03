@@ -31,7 +31,6 @@ import * as moment from 'moment';
 
     isAuthenticated(){
         const token = this.getToken();
-        debugger;
         if(token && this.isValid(token)){
             return true;
         }  else{
