@@ -19,7 +19,8 @@ class Login extends React.Component{
     render(){
 
         const {isAuth, errors} = this.props.auth;
-        
+        const {successRegistered} = this.props.location.state || false;
+
         if(isAuth){
             return <Redirect to={{pathname: '/rentals', state: {loginSuccess: true} }} />
         }
@@ -30,6 +31,12 @@ class Login extends React.Component{
                 <div className='row'>
                 <div className='col-md-5'>
                     <h1>Login</h1>
+                    {
+                        successRegistered &&
+                            <div className='alert alert-success'>
+                                <p> You have successfully register, now you can login.</p>
+                            </div>
+                    }
                     <LoginForm submitCallback={this.loginUser} errors={errors} />
                 </div>
                 <div className='col-md-6 ml-auto'>

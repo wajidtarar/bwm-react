@@ -1,12 +1,13 @@
 
 import axios from 'axios';
-import AuthService from 'services/AuthService';
+import authService from 'services/AuthService';
 
 import { FETCH_RENTAL_BY_ID_SUCCESS, 
           FETCH_RENTAL_BY_ID_INIT,
           FETCH_RENTALS_SUCCESS,
           LOGIN_SUCCESS,
-          LOGIN_ERROR} from './types';
+          LOGIN_ERROR,
+          LOGOUT} from './types';
 
 //---------------Rental Actions----------------------------------
 
@@ -74,7 +75,7 @@ export const register = (userData) => {
 export const checkAuthState = () => {
 
   return dispatch => {
-    if(AuthService.isAuthenticated()){
+    if(authService.isAuthenticated()){
       dispatch(loginSuccess());
     }
   }
@@ -93,13 +94,19 @@ const loginFailure = (errors) => {
   }
 }
 
+export const logout = () => {
+  authService.invalidateUser();
+  return {
+    type: LOGOUT
+  }
+}
 
 export const login = (userData) => {
   return dispatch => {
     return axios.post('/api/v1/users/auth', {...userData})
       .then(res => res.data)
       .then(token => {
-        localStorage.setItem('auth_token', token);
+        authService.saveToken();
         dispatch(loginSuccess());
       })
       .catch((error => {

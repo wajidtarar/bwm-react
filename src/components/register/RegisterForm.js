@@ -10,8 +10,6 @@ const RegisterForm = props => {
   const { handleSubmit, pristine, 
     submitting, submitCallback, valid, errors } = props
 
-    debugger;
-
   return (
     <form onSubmit={handleSubmit(submitCallback)}>
         <Field

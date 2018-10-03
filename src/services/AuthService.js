@@ -1,5 +1,4 @@
 
-
 import * as jwt from 'jsonwebtoken';
 import * as moment from 'moment';
 
@@ -7,6 +6,14 @@ import * as moment from 'moment';
 
     getToken(){
         return localStorage.getItem('auth_token');
+    }
+
+    saveToken(token){
+        return localStorage.setItem('auth_token', token);
+    }
+
+    invalidateUser(){
+        return localStorage.removeItem('auth_token');
     }
 
     decode(token){

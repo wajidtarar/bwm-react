@@ -23,6 +23,10 @@ class App extends Component {
     this.checkAuthState();
   }
 
+  logoutUser(){
+    store.dispatch(actions.logout());
+  }
+
   checkAuthState(){
     store.dispatch(actions.checkAuthState());
   }
@@ -32,7 +36,7 @@ class App extends Component {
       <Provider store={store}>
         <BrowserRouter>
           <div className='App'>
-            <Header/>
+            <Header logout={this.logoutUser} />
             <div className='container'>
               <Route exact path = '/'  render = { () => { return <Redirect to='rentals' />} } />
               <Route exact path = '/rentals' component={RentalListing} />

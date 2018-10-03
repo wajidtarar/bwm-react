@@ -18,14 +18,19 @@ export class Register extends React.Component{
     }
 
     registerUser(userData){
+
+        debugger;
+
+        
         actions.register(userData).then(
             (registered) => {
+                debugger;
                 this.setState({
                     redirect: true
                 })
             },
             (errors) => {
-                // debugger;
+                debugger;
                 this.setState({
                     errors: errors
                 });
