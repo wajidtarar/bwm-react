@@ -106,7 +106,7 @@ export const login = (userData) => {
     return axios.post('/api/v1/users/auth', {...userData})
       .then(res => res.data)
       .then(token => {
-        authService.saveToken();
+        authService.saveToken(token);
         dispatch(loginSuccess());
       })
       .catch((error => {

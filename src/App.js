@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Redirect} from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 
-import { Header } from 'components/shared/Header';
+import Header from 'components/shared/Header';
 import { init } from 'reducers';
 
 import RentalListing  from 'components/rental/rental-listing/RentalListing';

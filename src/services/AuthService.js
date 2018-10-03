@@ -21,6 +21,7 @@ import * as moment from 'moment';
     }
 
     getExpiration(token){
+        debugger;
         return moment.unix(this.decode(token).exp);
     }
 
@@ -30,6 +31,7 @@ import * as moment from 'moment';
 
     isAuthenticated(){
         const token = this.getToken();
+        debugger;
         if(token && this.isValid(token)){
             return true;
         }  else{
