@@ -4,6 +4,9 @@ import { BrowserRouter, Route, Redirect} from 'react-router-dom';
 import { Provider } from 'react-redux';
 
 import Header from 'components/shared/Header';
+import {ProtectedRoute} from 'components/shared/auth/ProtectedRoute';
+import {LoggedInRoute} from 'components/shared/auth/LoggedInRoute';
+
 import { init } from 'reducers';
 
 import RentalListing  from 'components/rental/rental-listing/RentalListing';
@@ -40,9 +43,9 @@ class App extends Component {
             <div className='container'>
               <Route exact path = '/'  render = { () => { return <Redirect to='rentals' />} } />
               <Route exact path = '/rentals' component={RentalListing} />
-              <Route exact path = '/rentals/:id' component={RentalDetail} />
+              <ProtectedRoute exact path = '/rentals/:id' component={RentalDetail} />
               <Route exact path = '/login/' component={Login} />
-              <Route exact path = '/register/' component={Register} />
+              <LoggedInRoute exact path = '/register/' component={Register} />
             </div>
 
           </div>
