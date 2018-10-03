@@ -6,5 +6,5 @@ export const minLength = min => value =>
 export const minLength4 = minLength(4);
 
 export const required = (value) => {
-    value ? undefined : 'input is required';
+    return value ? undefined : 'input is required';
 }

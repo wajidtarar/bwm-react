@@ -14,7 +14,6 @@ const RegisterForm = props => {
     <form onSubmit={handleSubmit(submitCallback)}>
         <Field
         name="username"
-        component="input"
         type="text"
         placeholder="User Name"
         label="User Name"
@@ -23,7 +22,6 @@ const RegisterForm = props => {
         />
         <Field
         name="email"
-        component="input"
         type="email"
         label="Email"
         className="form-control"
@@ -31,7 +29,6 @@ const RegisterForm = props => {
         />
         <Field
         name="password"
-        component="input"
         type="password"
         label="Password"
         className="form-control"
@@ -39,7 +36,6 @@ const RegisterForm = props => {
         />
         <Field
         name="passwordConfirmation"
-        component="input"
         type="password"
         label="Password Confirmation"
         className="form-control"
@@ -70,7 +66,7 @@ const validate = values => {
     if(!values.password){
         errors.password = 'password is requireds';
     }
-    if(values.password != values.passwordConfirmation){
+    if(values.password !== values.passwordConfirmation){
         errors.passwordConfirmation = 'password and confirm password  do not match';
     }
 

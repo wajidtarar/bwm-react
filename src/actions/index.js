@@ -9,11 +9,10 @@ import { FETCH_RENTAL_BY_ID_SUCCESS,
           LOGIN_SUCCESS,
           LOGIN_ERROR,
           LOGOUT} from './types';
-import AxiosService from '../services/AxiosService';
 
 //---------------Rental Actions----------------------------------
 
-const axiosInstance = AxiosService.getIntance();
+const axiosInstance = axiosService.getIntance();
 
 const fetchRentalByIdSuccess = (rental) => {
   return {
@@ -88,7 +87,7 @@ export const checkAuthState = () => {
 const loginSuccess = () => {
 
   return{
-    type: 'LOGIN_SUCCESS'
+    type: LOGIN_SUCCESS
   }
 }
 const loginFailure = (errors) => {

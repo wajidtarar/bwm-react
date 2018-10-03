@@ -13,7 +13,7 @@ export const authReducer = (state = INITIAL_STATE, action) => {
 
     switch (action.type){
 
-        case 'LOGIN_SUCCESS':
+        case LOGIN_SUCCESS:
             return Object.assign({}, state, {isAuth: true, errors: []} );
         case LOGIN_ERROR:
             return Object.assign({}, state, {errors: action.errors} );
